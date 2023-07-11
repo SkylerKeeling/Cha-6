@@ -4,6 +4,7 @@ $("#searchButton").on("click", function () {
   let city = $("#searchInput").val()
   console.log(city)
   getCoordinates(city)
+  $("#currentWeather").clear($("<h3>"))
 })
 
 function getCoordinates(cityValue) {
@@ -24,11 +25,24 @@ function getCurrentWeather(lat, lon) {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-
-      //grab weathe values from api response
       var temp = $("<h3>").text("temp: " + data.main.temp)
-      //append to targeted div
-
       $("#currentWeather").append(temp)
     })
+  // details for current weather
+  // city name
+  // date
+  // icon for tempature
+  // temp
+  // humidity
 }
+
+// function getFutureWeather () {
+// 5 day forecast
+// displays date for each day
+//icon for weather
+//temp
+//wind speed
+//humidity
+//}
+
+//code for five history searches

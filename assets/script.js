@@ -4,7 +4,6 @@ $("#searchButton").on("click", function () {
   let city = $("#searchInput").val()
   console.log(city)
   getCoordinates(city)
-  $("#currentWeather").clear($("<h3>"))
 })
 
 function getCoordinates(cityValue) {
@@ -25,15 +24,34 @@ function getCurrentWeather(lat, lon) {
     .then(response => response.json())
     .then(data => {
       console.log(data)
+      let cityName = $("<h3>").text(data.name)
+      $("#currentWeather").append(cityName)
       var temp = $("<h3>").text("temp: " + data.main.temp)
       $("#currentWeather").append(temp)
+      let theWeather = $("<h3>").text("weather: " + data.weather[0].description)
+      $("#currentWeather").append(theWeather)
+      const dateToday = $("<h3>").text(dayjs().format("MM / DD / YYYY"))
+      $("#currentWeather").append(dateToday)
+      let humidity = $("<h3>").text("humidity: " + data.main.humidity)
+      $("#currentWeather").append(humidity)
+
+      // icon for tempature
+      if (data.weather[0].main == "Clouds") {
+        $("#currentWeather").append("<i class='fa-solid fa-cloud'></i>")
+      } else if (data.weather[0].main == "Thunderstorm") {
+        $("#currentWeather").append("<i class='fa-solid fa-cloud-bolt'></i>")
+      } else if (data.weather[0].main == "clear") {
+        $("#currentWeather").append("<i class='fa-solid fa-sun'></i>")
+      } else if (data.weather[0].main == "Rain") {
+        $("#currentWeather").append(
+          "<i class='fa-solid fa-cloud-showers-heavy'></i>"
+        )
+      } else if (data.weather[0].main == "Drizzle") {
+        $("#currentWeather").append("<i class='fa-solid fa-cloud-rain'></i>")
+      } else if (data.weather[0].main == "Snow") {
+        $("currentWeather").append("<i class='fa-solid fa-snowflake'></i>")
+      }
     })
-  // details for current weather
-  // city name
-  // date
-  // icon for tempature
-  // temp
-  // humidity
 }
 
 // function getFutureWeather () {

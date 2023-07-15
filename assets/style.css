@@ -1,3 +1,11 @@
 card {
   border-color: white;
 }
+
+div {
+  margin: 5px;
+}
+
+#currentWeather {
+  width: fit-content;
+}

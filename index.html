@@ -21,35 +21,35 @@
 
     <div class="row">
       <section class="col-4 m-2">
-        <nav class="navbar navbar-light">
-          <!-- <form class="input-group form-inline" id="searchForm"> -->
+        <div class="d-inline d-flex m-2">
           <input
-            class="form-control mr-sm-2 inline"
+            class="form-control"
             type="search"
             placeholder="Search"
             aria-label="Search"
             id="searchInput"
           />
-          <button
-            class="btn btn-outline-success my-2 my-sm-0 inline"
-            id="searchButton"
-          >
+          <button class="btn btn-outline-success" id="searchButton">
             Search
           </button>
-          <!-- </form> -->
-        </nav>
-        <ul id="searchHistory" class="column">
-          Search History:
-        </ul>
+        </div>
+
+        <table id="searchHistory" class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+        </table>
       </section>
       <section class="col m-2" style="width: 18rem">
         <card
           id="currentWeather"
-          class="card d-flex justify-content-center border-white"
+          class="card d-flex justify-content-center border-0"
         ></card>
       </section>
     </div>
-    <section id="fiveDay"></section>
+    <section class="d-flex justify-content-center" id="fiveDay"></section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/script.js"></script>
     <script

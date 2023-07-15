@@ -1,5 +1,6 @@
 const APIKey = "ab63b8d5c4c2a640bb6696b4c3b87a21"
 renderingCityHTML()
+hideSearchHistory()
 
 $("#searchButton").on("click", function () {
   let city = $("#searchInput").val()
@@ -7,7 +8,16 @@ $("#searchButton").on("click", function () {
   getCoordinates(city)
   storingCity(city)
   renderingCityHTML()
+  $("#fiveDay").empty()
+  showSearchHistory()
 })
+
+function hideSearchHistory() {
+  $("#searchHistory").hide()
+}
+function showSearchHistory() {
+  $("#searchHistory").show()
+}
 
 function storingCity(city) {
   const storage = localStorage.getItem("cities")
@@ -22,14 +32,15 @@ function storingCity(city) {
     localStorage.setItem("cities", JSON.stringify(storageUnit))
   }
 }
-//validation for city, no same city twice
 
 function renderingCityHTML() {
   const displayedHistory = JSON.parse(localStorage.getItem("cities"))
   if (displayedHistory) {
     $("#searchHistory").empty()
+    searchHistoryText = $("<th>").text("Search History:")
+    $("#searchHistory").append(searchHistoryText)
     for (var i = 0; i < displayedHistory.length; i++) {
-      let cityHistory = $("<li>")
+      let cityHistory = $("<tr>")
       cityHistory.text(displayedHistory[i])
       $("#searchHistory").append(cityHistory)
     }
@@ -55,6 +66,7 @@ function getCurrentWeather(lat, lon) {
     .then(response => response.json())
     .then(data => {
       console.log(data)
+      $("#currentWeather").empty()
       let cityName = $("<h2>").text(data.name)
       $("#currentWeather").append(cityName)
       if (data.weather[0].main == "Clouds") {
@@ -74,7 +86,7 @@ function getCurrentWeather(lat, lon) {
       } else if (data.weather[0].main == "Snow") {
         $("currentWeather").append("<i class='fa-solid fa-snowflake'></i>")
       }
-      const dateToday = $("<h4>").text(dayjs().format("MM / DD / YYYY"))
+      const dateToday = $("<h4>").text(dayjs().format("YYYY-MM-DD"))
       $("#currentWeather").append(dateToday)
       var temp = $("<h4>").text("temp: " + data.main.temp)
       $("#currentWeather").append(temp)
@@ -82,6 +94,9 @@ function getCurrentWeather(lat, lon) {
       $("#currentWeather").append(theWeather)
       let humidity = $("<h4>").text("humidity: " + data.main.humidity)
       $("#currentWeather").append(humidity)
+      let currentCard = $("#currentWeather")
+      currentCard.removeClass("border-0")
+      currentCard.addClass("border border-3 border-dark rounded p-2")
     })
 }
 
@@ -92,7 +107,6 @@ function getFiveDayWeather(lat, lon) {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      //, 14,22,30,38
       for (var i = 0; i < data.list.length; i += 8) {
         let fiveDayCard = $("<div>")
         if (data.list[i].weather[0].main == "Clouds") {
@@ -120,10 +134,10 @@ function getFiveDayWeather(lat, lon) {
         fiveDayCard.append(theWeather)
         let humidity = $("<h4>").text("humidity: " + data.list[i].main.humidity)
         fiveDayCard.append(humidity)
+        fiveDayCard.addClass("border border-3 border-dark rounded p-2 w-100")
         $("#fiveDay").append(fiveDayCard)
+
         console.log(fiveDayCard)
       }
     })
 }
-
-//code for search history

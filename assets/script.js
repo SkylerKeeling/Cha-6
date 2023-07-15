@@ -37,12 +37,17 @@ function renderingCityHTML() {
   const displayedHistory = JSON.parse(localStorage.getItem("cities"))
   if (displayedHistory) {
     $("#searchHistory").empty()
-    searchHistoryText = $("<th>").text("Search History:")
+    searchHistoryText = $("<h4>").text("Search History:")
     $("#searchHistory").append(searchHistoryText)
     for (var i = 0; i < displayedHistory.length; i++) {
-      let cityHistory = $("<tr>")
+      let cityHistory = $("<button>")
+      cityHistory.addClass(
+        "form-control mb-1 border border-3 border-dark rounded"
+      )
       cityHistory.text(displayedHistory[i])
       $("#searchHistory").append(cityHistory)
+      let cityList = $("#searchHistory")
+      cityList.addClass("form-control m-2 border border-3 border-dark rounded")
     }
   }
 }

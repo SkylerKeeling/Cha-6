@@ -19,36 +19,32 @@
     </header>
     <!-- side search bar and history -->
 
-    <div class="row">
-      <section class="col-4 m-2">
-        <div class="d-inline d-flex m-2">
-          <input
-            class="form-control"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            id="searchInput"
-          />
-          <button class="btn btn-outline-success" id="searchButton">
-            Search
-          </button>
+    <section class="col-4 m-2">
+      <div class="d-inline d-flex m-2">
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          id="searchInput"
+        />
+        <button class="btn btn-outline-success" id="searchButton">
+          Search
+        </button>
+      </div>
+      <div class="container">
+        <div class="row w-100">
+          <div id="searchHistory" class="col"></div>
+          <div class="col m-2" style="width: 18rem">
+            <card
+              id="currentWeather"
+              class="card d-flex justify-content-center border-0"
+            ></card>
+          </div>
         </div>
-
-        <table id="searchHistory" class="table">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-        </table>
-      </section>
-      <section class="col m-2" style="width: 18rem">
-        <card
-          id="currentWeather"
-          class="card d-flex justify-content-center border-0"
-        ></card>
-      </section>
-    </div>
+      </div>
+    </section>
+    `
     <section class="d-flex justify-content-center" id="fiveDay"></section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/script.js"></script>

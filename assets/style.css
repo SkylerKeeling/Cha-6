@@ -8,4 +8,6 @@ div {
 
 #currentWeather {
   width: fit-content;
+  position: absolute;
+  float: right;
 }
